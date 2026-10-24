@@ -18,13 +18,16 @@
    │ demo        │ URL del sitio en vivo (opcional)                         │
    │ repo        │ URL del repositorio en GitHub (opcional)                 │
    │ status      │ Texto de insignia opcional: "En desarrollo", "Nuevo"     │
-   │ featured    │ true → tarjeta grande (usa solo uno)                     │
+   │ featured    │ true → tarjeta a todo el ancho de la fila                │
+   │ reverse     │ true → (con featured) imagen a la derecha                │
+   │ half        │ true → tarjeta de media fila (2 por fila)                │
+   │ fit         │ "contain" → muestra la captura completa y centrada       │
    │ placeholder │ true → espacio reservado. BÓRRALO cuando lo completes.   │
    └─────────────┴──────────────────────────────────────────────────────────┘
 
-   NOTA DE DISEÑO: el proyecto "featured" ocupa 2 espacios. Con 5 proyectos
-   (1 destacado + 4) la cuadrícula queda completa en 3 y en 2 columnas.
-   Si agregas más, múltiplos de 3 extra (8, 11...) mantienen las filas llenas.
+   NOTA DE DISEÑO: en escritorio la cuadrícula tiene 6 columnas: normal = 1/3
+   de fila, "half" = 1/2, "featured" = fila completa. Combina para llenar filas
+   (3 normales, 2 half, o 1 featured).
 
    CONSEJO: usa imágenes 16:10 (ej. 1600×1000) en formato .webp o .jpg.
    ========================================================================== */
@@ -78,7 +81,6 @@ VX.PROJECTS = [
     image: "assets/img/projects/foodpoint.webp",
     demo: "https://mesana-alpha.vercel.app/",
     repo: "",
-    status: "En producción",
     featured: true
   },
   {
@@ -89,7 +91,8 @@ VX.PROJECTS = [
     tags: ["E-commerce", "Mayoreo", "WhatsApp"],
     image: "assets/img/projects/fajas-maydel.webp",
     demo: "https://www.fajascolombianasmaydel.com/",
-    repo: ""
+    repo: "",
+    half: true
   },
   {
     title: "Fanny Sáenz BeautyStudio",
@@ -99,7 +102,8 @@ VX.PROJECTS = [
     tags: ["WordPress", "WhatsApp", "Negocio local"],
     image: "assets/img/projects/fanny-saenz.webp",
     demo: "https://misitiochihuahua.com/",
-    repo: ""
+    repo: "",
+    half: true
   },
   {
     title: "Catálogo Maestro · Inventario multinegocio",
@@ -117,6 +121,8 @@ VX.PROJECTS = [
     ],
     demo: "",
     repo: "https://github.com/jesusivangd11/Sistema-de-Inventario-Maestro",
-    featured: true
+    featured: true,
+    reverse: true,
+    fit: "contain"
   }
 ];

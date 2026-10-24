@@ -79,7 +79,7 @@ Busca **`TODO`** en `index.html` (Ctrl+F en VS Code) para encontrar cada punto.
 | 6 | Tecnologías y habilidades | `index.html` → `#habilidades` |
 | 7 | **Proyectos** | `js/data/projects.js` |
 | 8 | Experiencia y formación | `index.html` → `#trayectoria` |
-| 9 | Correo (3 lugares) y LinkedIn (`TU-USUARIO`) | `index.html` → `#contacto`, `#proyectos` y footer |
+| 9 | Correo (3 lugares) | `index.html` → `#contacto`, `#proyectos` y footer |
 | 10 | CV en PDF (ya incluido; reemplázalo al actualizarlo) | `assets/docs/cv.pdf` |
 
 ---
@@ -127,7 +127,7 @@ Mensaje actual: *"Hola Jesús, vi tu portafolio de Kato Labs y me gustaría plat
 
 ## Cambiar colores
 
-Todo está en `css/base/variables.css`. La paleta se llama **"cuatro vértices"**: cada color representa un área de trabajo y se repite en todo el sitio (leyenda del inicio, habilidades, filtros de proyectos, proceso, trayectoria).
+Todo está en `css/base/variables.css`. La paleta usa **cuatro colores**: cada color representa un área de trabajo y se repite en todo el sitio (leyenda del inicio, habilidades, filtros de proyectos, proceso, trayectoria).
 
 | Variable | Color | Significado | Oscuro | Claro |
 |----------|-------|-------------|--------|-------|

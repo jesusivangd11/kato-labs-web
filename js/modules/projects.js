@@ -37,6 +37,9 @@ VX.projects = (function () {
     var categories = VX.CATEGORIES || {};
     var classes = ["project-card", toneClass(p.category)];
     if (p.featured) classes.push("is-featured");
+    if (p.half) classes.push("is-half");
+    if (p.reverse) classes.push("is-reverse");
+    if (p.fit === "contain") classes.push("is-contain");
     if (p.placeholder) classes.push("is-placeholder");
 
     var media = p.image
