@@ -9,3 +9,5 @@ desktop.ini
 
 # Dependencias (si en el futuro usas npm)
 node_modules/
+
+.vercel
