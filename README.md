@@ -15,7 +15,7 @@ Sitio estático hecho con HTML, CSS y JavaScript puro: no necesita instalar nada
 ## Estructura
 
 ```
-Vertex Labs/
+Kato Labs/
 ├── index.html                  ← Todo el contenido (textos, secciones)
 ├── README.md                   ← Este archivo
 ├── .gitignore
