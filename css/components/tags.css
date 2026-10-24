@@ -1,0 +1,38 @@
+/* ==========================================================================
+   ETIQUETAS DE TECNOLOGÍAS
+   --------------------------------------------------------------------------
+   Se muestran como una lista técnica, sin cápsulas:
+       ▪ Python   ▪ Java   ▪ Node.js   ▪ REST APIs
+   El marcador cuadrado toma el color del contenedor (.tone-* en el HTML
+   o en la tarjeta de proyecto).
+   ========================================================================== */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.1rem;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-sm);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--c-text);
+  transition: color var(--dur-fast) ease;
+}
+
+/* Marcador cuadrado del color del contenedor */
+.tag::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--tone, var(--c-accent));
+  flex-shrink: 0;
+}
+
+.tag:hover {
+  color: var(--tone, var(--c-accent));
+}

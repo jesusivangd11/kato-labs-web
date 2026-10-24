@@ -1,0 +1,102 @@
+/* ==========================================================================
+   SECCIÓN: TECNOLOGÍAS Y HABILIDADES
+   --------------------------------------------------------------------------
+   Catálogo único de habilidades. Cada una tiene un color según su tipo
+   (clase .tone-* en el HTML):
+     turquesa = Desarrollo · índigo = Plataformas y herramientas
+     ámbar = Estrategia digital · coral = Infraestructura
+   ========================================================================== */
+
+/* Leyenda de colores (reutiliza el estilo .vertex-legend del hero) */
+.skills__legend {
+  margin-bottom: var(--sp-6);
+}
+
+/* Cuadrícula: las líneas divisorias se forman con el fondo + gap de 1px */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  gap: 1px;
+  background: var(--c-line);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.skill {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-6) var(--sp-5);
+  /* Tinte del color de la habilidad desde la esquina superior */
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(var(--tone-rgb), 0.12), transparent 60%),
+    var(--c-bg-elev);
+  transition: background-color var(--dur-med) ease;
+}
+
+.skill:hover {
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(var(--tone-rgb), 0.24), transparent 65%),
+    var(--c-surface);
+}
+
+/* Barra de color superior que se extiende al pasar el mouse */
+.skill::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--tone);
+  transform: scaleX(0.2);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.skill:hover::before {
+  transform: scaleX(1);
+}
+
+/* Rombo decorativo del color de la habilidad */
+.skill::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--sp-6) + 0.45em);
+  right: var(--sp-5);
+  width: 10px;
+  height: 10px;
+  background: var(--tone);
+  transform: rotate(45deg);
+  box-shadow: 0 0 14px rgba(var(--tone-rgb), 0.8);
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.skill:hover::after {
+  transform: rotate(225deg) scale(1.3);
+}
+
+.skill__name {
+  font-size: var(--fs-lg);
+  padding-right: var(--sp-5); /* espacio para el rombo */
+  overflow-wrap: normal;      /* nunca partir una palabra a la mitad */
+}
+
+/* Subtítulo opcional en una segunda línea (ej. "Ciberseguridad") */
+.skill__sub {
+  display: block;
+  margin-top: 0.15em;
+  font-family: var(--ff-body);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--tone);
+}
+
+.skill__desc {
+  color: var(--c-text-muted);
+  font-size: var(--fs-base);
+  line-height: 1.55;
+}

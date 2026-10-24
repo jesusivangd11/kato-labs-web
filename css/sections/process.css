@@ -1,0 +1,98 @@
+/* ==========================================================================
+   SECCIÓN: PROCESO
+   --------------------------------------------------------------------------
+   Cuatro pasos unidos por una línea de gradiente (vertical en móvil).
+   Cada paso tiene su color (.tone-* en el HTML) y un "nodo" que brilla.
+   ========================================================================== */
+
+.process__list {
+  position: relative;
+  display: grid;
+  gap: var(--sp-6);
+  padding-left: var(--sp-6);
+}
+
+/* Línea que conecta los nodos (vertical en móvil) */
+.process__list::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 5px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--c-teal), var(--c-indigo), var(--c-amber), var(--c-coral));
+  opacity: 0.7;
+}
+
+.process-step {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(var(--tone-rgb), 0.2);
+  background: linear-gradient(160deg, rgba(var(--tone-rgb), 0.1), transparent 60%);
+  transition: border-color var(--dur-med) ease, background-color var(--dur-med) ease;
+}
+
+.process-step:hover {
+  border-color: rgba(var(--tone-rgb), 0.55);
+  background-color: rgba(var(--tone-rgb), 0.06);
+}
+
+.process-step__node {
+  position: absolute;
+  top: 4px;
+  left: calc(var(--sp-6) * -1);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1.5px solid var(--tone);
+  background: var(--tone);
+  box-shadow: 0 0 14px rgba(var(--tone-rgb), 0.7);
+  transition: box-shadow var(--dur-med) ease;
+}
+
+.process-step:hover .process-step__node {
+  box-shadow: 0 0 0 6px rgba(var(--tone-rgb), 0.2), 0 0 20px rgba(var(--tone-rgb), 0.9);
+}
+
+
+.process-step h3 {
+  font-size: var(--fs-lg);
+}
+
+.process-step p {
+  color: var(--c-text-muted);
+  font-size: var(--fs-base);
+  max-width: 32ch;
+}
+
+/* Escritorio: línea horizontal */
+@media (min-width: 860px) {
+  .process__list {
+    grid-template-columns: repeat(4, 1fr);
+    padding-left: 0;
+    padding-top: var(--sp-7);
+  }
+
+  .process__list::before {
+    top: 5px;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 1px;
+    background: linear-gradient(to right, var(--c-teal), var(--c-indigo), var(--c-amber), var(--c-coral));
+  }
+
+  .process__list {
+    gap: var(--sp-4);
+  }
+
+  .process-step__node {
+    top: calc(var(--sp-7) * -1);
+    left: 0;
+  }
+}

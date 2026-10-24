@@ -1,0 +1,367 @@
+/* ==========================================================================
+   HEADER Y NAVEGACIÓN
+   --------------------------------------------------------------------------
+   - Fijo arriba, siempre con fondo translúcido para que se distinga;
+     se vuelve más sólido al hacer scroll (.is-scrolled, vía JS).
+   - En pantallas menores a 1280px el menú se abre como panel a pantalla completa.
+   ========================================================================== */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: var(--header-h);
+  /* Fondo visible desde el inicio (no transparente) */
+  background: color-mix(in srgb, var(--c-bg) 62%, transparent);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-bottom: 1px solid var(--c-line-strong);
+  transition:
+    background-color var(--dur-med) ease,
+    box-shadow var(--dur-med) ease;
+}
+
+/* Línea de gradiente de marca en el borde inferior */
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px 0;
+  height: 1px;
+  background: var(--grad-brand);
+  opacity: 0.5;
+}
+
+.site-header.is-scrolled {
+  background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.6);
+}
+
+/* En pantallas chicas el header es más bajo */
+@media (max-width: 700px) {
+  :root {
+    --header-h: 84px;
+  }
+
+}
+
+.site-header__inner {
+  max-width: 1480px; /* un poco más ancho que el resto: logo + nombre + menú */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: var(--sp-5);
+}
+
+/* ---------- Logo ---------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--ff-display);
+  font-size: clamp(1.3125rem, 1.15rem + 0.5vw, 1.625rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo de Kato Labs (imagen PNG con fondo transparente en assets/img/brand/) */
+.brand__logo-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.brand__logo {
+  height: 38px;
+  width: auto;
+}
+
+.brand:hover .brand__logo-wrap {
+  transform: scale(1.04);
+}
+
+/* ---------- Animación: las "raíces" (circuito) de la T ----------
+   Cada línea usa pathLength="1": se dibuja animando stroke-dashoffset de 1 a 0.
+   Orden: tallo → ramas → venas → nodos; después una chispa recorre el
+   circuito cada pocos segundos. */
+.brand__roots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.roots-line {
+  fill: none;
+  stroke: var(--c-teal);
+  stroke-width: 3.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 3px rgba(var(--c-teal-rgb), 0.9));
+  animation: roots-grow 1.1s var(--ease-out) 0.3s forwards;
+  transition: filter var(--dur-med) ease;
+}
+
+.roots-line--b1 { animation-delay: 1.05s; animation-duration: 0.45s; }
+.roots-line--b2 { animation-delay: 1.25s; animation-duration: 0.45s; }
+
+/* Venas: en el lado verde de la hoja */
+.roots-line--v1,
+.roots-line--v2 {
+  stroke: #8FD8A0;
+  filter: drop-shadow(0 0 3px rgba(143, 216, 160, 0.9));
+}
+
+.roots-line--v1 { animation-delay: 1.45s; animation-duration: 0.5s; }
+.roots-line--v2 { animation-delay: 1.6s;  animation-duration: 0.5s; }
+
+.roots-node {
+  fill: var(--c-teal);
+  filter: drop-shadow(0 0 4px rgba(var(--c-teal-rgb), 1));
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  animation: roots-node-pop 0.45s var(--ease-out) 0.2s forwards;
+}
+
+.roots-node--b1 { animation-delay: 1.4s; }
+.roots-node--b2 { animation-delay: 1.6s; }
+
+/* Chispa: un segmento corto y brillante que viaja por el circuito */
+.roots-pulse {
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 0.07 1;
+  stroke-dashoffset: 0.07;
+  opacity: 0;
+  filter: drop-shadow(0 0 4px rgba(var(--c-teal-rgb), 1));
+  animation: roots-pulse 4s ease-in-out 2.4s infinite;
+}
+
+/* Al pasar el mouse el circuito brilla más */
+.brand:hover .roots-line {
+  filter: drop-shadow(0 0 6px rgba(var(--c-teal-rgb), 1));
+}
+
+@keyframes roots-grow {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes roots-node-pop {
+  0%   { transform: scale(0); }
+  70%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+@keyframes roots-pulse {
+  0%   { stroke-dashoffset: 0.07;  opacity: 1; }
+  45%  { stroke-dashoffset: -1;    opacity: 1; }
+  46%, 100% { stroke-dashoffset: -1; opacity: 0; }
+}
+
+/* Sin animaciones: el circuito se muestra completo desde el inicio */
+@media (prefers-reduced-motion: reduce) {
+  .roots-line { stroke-dashoffset: 0; }
+  .roots-node { transform: none; }
+  .roots-pulse { display: none; }
+}
+
+.brand__sub {
+  font-weight: 400;
+  color: var(--c-text-muted);
+}
+
+/* ---------- Navegación ---------- */
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  /* El espacio lateral se ajusta al ancho para que el menú quepa completo */
+  padding: var(--sp-2) clamp(0.5rem, 0.1rem + 0.6vw, 0.875rem);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--c-text) 82%, transparent);
+  transition: color var(--dur-fast) ease;
+}
+
+.nav__link:hover,
+.nav__link.is-active {
+  color: var(--c-text);
+}
+
+/* Punto indicador bajo el enlace activo */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  transform: translateX(-50%) scale(0);
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.nav__link.is-active::after {
+  transform: translateX(-50%) scale(1);
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  position: relative;
+  z-index: 2;
+}
+
+.site-header__cta {
+  min-height: 48px;
+  padding-inline: var(--sp-6);
+}
+
+.site-header .theme-toggle {
+  width: 48px;
+  min-height: 48px;
+  border-color: var(--c-line-strong);
+}
+
+/* Iconos sol/luna del botón de tema */
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+/* ---------- Botón hamburguesa (solo móvil) ---------- */
+.nav-toggle {
+  display: none;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-xs);
+  place-items: center;
+}
+
+.nav-toggle__bars {
+  position: relative;
+  width: 16px;
+  height: 10px;
+}
+
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--c-text);
+  transition: transform var(--dur-med) var(--ease-out), top var(--dur-med) var(--ease-out);
+}
+
+.nav-toggle__bars::before { top: 0; }
+.nav-toggle__bars::after  { top: calc(100% - 1.5px); }
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::before {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::after {
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* ---------- Responsivo: menú móvil ---------- */
+@media (max-width: 1279px) {
+  .nav-toggle {
+    display: grid;
+  }
+
+  .site-header__cta {
+    display: none;
+  }
+
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-h) + var(--sp-6)) var(--gutter) var(--sp-6);
+    background: var(--c-bg);
+    clip-path: circle(0% at calc(100% - 40px) calc(var(--header-h) / 2));
+    visibility: hidden;
+    transition:
+      clip-path var(--dur-slow) var(--ease-in-out),
+      visibility 0s linear var(--dur-slow);
+  }
+
+  .nav.is-open {
+    clip-path: circle(150% at calc(100% - 40px) calc(var(--header-h) / 2));
+    visibility: visible;
+    transition: clip-path var(--dur-slow) var(--ease-in-out), visibility 0s;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-2);
+    width: 100%;
+  }
+
+  .nav__link {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    font-weight: 600;
+    padding: var(--sp-2) 0;
+    color: var(--c-text);
+  }
+
+  .nav__link::after {
+    display: none;
+  }
+
+  /* Evita scroll del body con el menú abierto */
+  body.nav-open {
+    overflow: hidden;
+  }
+}
+
+/* ---------- Ajustes del logo según el ancho ---------- */
+
+/* Laptops (1280–1479px): solo el logo, para que el menú quepa completo */
+@media (min-width: 1280px) and (max-width: 1479px) {
+  .site-header .brand__name {
+    display: none;
+  }
+}
+
+/* Móvil: solo el logo, más chico */
+@media (max-width: 700px) {
+  .brand__logo {
+    height: 30px;
+  }
+
+  .site-header .brand__name {
+    display: none;
+  }
+}

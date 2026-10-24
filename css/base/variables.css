@@ -1,0 +1,148 @@
+/* ==========================================================================
+   VARIABLES (Design Tokens)
+   --------------------------------------------------------------------------
+   Único lugar donde se definen colores, tipografías, espacios y tiempos.
+   Si quieres cambiar la identidad visual del sitio, empieza aquí.
+
+   Paleta Kato Labs — "cuatro vértices":
+   - Turquesa  → color principal de marca (botones, enlaces, backend)
+   - Índigo    → web / frontend
+   - Ámbar     → móvil
+   - Coral     → datos / otros
+   Sobre una base azul tinta profunda (oscuro) o gris azulado (claro).
+
+   Cada color tiene su versión "-rgb" porque el canvas del hero
+   (js/modules/vertex-field.js) y algunas transparencias la necesitan.
+   ========================================================================== */
+
+:root {
+  /* ---------- Base: tema oscuro (por defecto) ---------- */
+  --c-bg:           #0A0D18;
+  --c-bg-elev:      #0F1322;
+  --c-surface:      #141A2E;
+  --c-surface-2:    #1A2139;
+  --c-line:         rgba(200, 210, 255, 0.09);
+  --c-line-strong:  rgba(200, 210, 255, 0.2);
+
+  --c-text:         #ECEFF7;
+  --c-text-muted:   #9AA3BD;
+  --c-text-faint:   #626B87;
+
+  /* ---------- Los cuatro vértices ---------- */
+  --c-teal:    #5EE0C1;  --c-teal-rgb:   94, 224, 193;
+  --c-indigo:  #8B9BFF;  --c-indigo-rgb: 139, 155, 255;
+  --c-amber:   #FFC46B;  --c-amber-rgb:  255, 196, 107;
+  --c-coral:   #FF8D7E;  --c-coral-rgb:  255, 141, 126;
+
+  /* ---------- Acento principal (= turquesa) ---------- */
+  --c-accent:       var(--c-teal);
+  --c-accent-rgb:   var(--c-teal-rgb);
+  --c-accent-hover: #86EAD2;
+  --c-accent-ink:   #06120F;   /* Texto sobre fondo de acento */
+  --c-accent-soft:  rgba(94, 224, 193, 0.14);
+
+  --c-warm:         var(--c-amber);
+  --c-text-rgb:     236, 239, 247;
+  --c-bg-rgb:       10, 13, 24;
+
+  /* ---------- Gradientes de marca ---------- */
+  --grad-brand: linear-gradient(110deg, var(--c-teal) 0%, var(--c-indigo) 55%, var(--c-coral) 100%);
+  --grad-cool:  linear-gradient(120deg, var(--c-teal), var(--c-indigo));
+  --grad-warm:  linear-gradient(120deg, var(--c-amber), var(--c-coral));
+  /* Panel profundo (sección contacto, cinta) — igual en ambos temas */
+  --grad-deep:  linear-gradient(135deg, #0E2A33 0%, #161C4A 55%, #2A1631 100%);
+
+  /* Intensidad de las manchas de color del fondo */
+  --blob-opacity: 0.55;
+
+  /* ---------- Tipografía ---------- */
+  --ff-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --ff-body:    "Instrument Sans", "Segoe UI", sans-serif;
+  --ff-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+
+  /* Escala fluida: crece suavemente entre móvil y escritorio.
+     Textos (xs → md) en rem: crecen con el tamaño base de typography.css.
+     Títulos (lg → hero) en px: mantienen su tamaño sin importar la base. */
+  --fs-xs:   0.8125rem;
+  --fs-sm:   0.9375rem;
+  --fs-base: 1rem;
+  --fs-md:   clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
+  --fs-lg:   clamp(20px, 17.6px + 0.6vw, 26px);
+  --fs-xl:   clamp(28px, 22.4px + 1.5vw, 44px);
+  --fs-2xl:  clamp(36px, 25.6px + 3vw, 68px);
+  --fs-hero: clamp(44px, 24px + 5.6vw, 112px);
+
+  /* ---------- Espaciado ---------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-section: clamp(5rem, 3rem + 8vw, 10rem);
+
+  /* ---------- Layout ---------- */
+  --container: 1320px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --header-h: 108px;   /* altura del header (en móvil se reduce, ver header.css) */
+
+  /* ---------- Bordes y sombras ---------- */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-lg: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+
+  /* ---------- Movimiento ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-med: 400ms;
+  --dur-slow: 900ms;
+
+  color-scheme: dark;
+}
+
+/* ---------- Tema claro (se activa con el botón del header) ---------- */
+:root[data-theme="light"] {
+  --c-bg:           #EAEFF7;
+  --c-bg-elev:      #E0E7F2;
+  --c-surface:      #F8FAFE;
+  --c-surface-2:    #EEF2FA;
+  --c-line:         rgba(20, 30, 70, 0.1);
+  --c-line-strong:  rgba(20, 30, 70, 0.22);
+
+  --c-text:         #0E1430;
+  --c-text-muted:   #4A5475;
+  --c-text-faint:   #7F88A6;
+
+  /* Versiones más profundas para buen contraste sobre fondo claro */
+  --c-teal:    #0B9A7C;  --c-teal-rgb:   11, 154, 124;
+  --c-indigo:  #4C5BDB;  --c-indigo-rgb: 76, 91, 219;
+  --c-amber:   #C47D06;  --c-amber-rgb:  196, 125, 6;
+  --c-coral:   #DB5440;  --c-coral-rgb:  219, 84, 64;
+
+  --c-accent-hover: #08826A;
+  --c-accent-ink:   #FFFFFF;
+  --c-accent-soft:  rgba(11, 154, 124, 0.12);
+  --c-text-rgb:     14, 20, 48;
+  --c-bg-rgb:       234, 239, 247;
+
+  --blob-opacity: 0.4;
+  --shadow-lg: 0 30px 60px -24px rgba(30, 40, 90, 0.22);
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   TONOS
+   Asigna uno de los cuatro colores a un componente. El componente usa
+   var(--tone) y var(--tone-rgb) en su CSS.
+   Ej.: <article class="stack-card tone-indigo">
+   ========================================================================== */
+.tone-teal   { --tone: var(--c-teal);   --tone-rgb: var(--c-teal-rgb); }
+.tone-indigo { --tone: var(--c-indigo); --tone-rgb: var(--c-indigo-rgb); }
+.tone-amber  { --tone: var(--c-amber);  --tone-rgb: var(--c-amber-rgb); }
+.tone-coral  { --tone: var(--c-coral);  --tone-rgb: var(--c-coral-rgb); }

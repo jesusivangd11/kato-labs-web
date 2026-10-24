@@ -1,0 +1,157 @@
+/* ==========================================================================
+   SECCIÓN: SOBRE MÍ
+   ========================================================================== */
+
+/* Resplandor índigo detrás del texto */
+.about {
+  --glow-rgb: var(--c-indigo-rgb);
+  --glow-x: 45%;
+  --glow-y: -15%;
+}
+
+.about__grid {
+  display: grid;
+  gap: var(--sp-8);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .about__grid {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(3rem, 2rem + 4vw, 7rem);
+  }
+}
+
+/* ---------- Retrato ---------- */
+.about__portrait {
+  display: grid;
+  gap: var(--sp-4);
+  max-width: 300px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.about__portrait figcaption {
+  display: grid;
+  gap: var(--sp-1);
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+}
+
+.about__portrait figcaption strong {
+  font-family: var(--ff-display);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+/* Marco con borde de gradiente de marca */
+.portrait-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(var(--c-surface), var(--c-surface)) padding-box,
+    var(--grad-brand) border-box;
+  border: 1.5px solid transparent;
+  box-shadow: 0 40px 80px -30px rgba(var(--c-indigo-rgb), 0.45);
+}
+
+.portrait-frame img,
+.portrait-frame__placeholder {
+  position: absolute;
+  inset: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.portrait-frame__placeholder {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--sp-3);
+  /* Malla de color con los cuatro vértices + rayado técnico */
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 10px, var(--c-line) 10px 11px),
+    radial-gradient(circle at 20% 15%, rgba(var(--c-teal-rgb), 0.45), transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(var(--c-indigo-rgb), 0.45), transparent 50%),
+    radial-gradient(circle at 70% 90%, rgba(var(--c-coral-rgb), 0.35), transparent 50%),
+    radial-gradient(circle at 10% 85%, rgba(var(--c-amber-rgb), 0.3), transparent 45%),
+    var(--c-surface-2);
+  color: var(--c-text-faint);
+  font-size: var(--fs-xs);
+  text-align: center;
+}
+
+.portrait-frame__initials {
+  font-family: var(--ff-display);
+  font-size: clamp(4rem, 3rem + 4vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--c-text);
+  line-height: 1;
+}
+
+/* Marcas de esquina (como un visor de cámara / plano técnico) */
+.portrait-frame__corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--c-text);
+  border-style: solid;
+  border-width: 0;
+}
+
+.portrait-frame__corner--tl { top: -6px;    left: -6px;  border-top-width: 2px;    border-left-width: 2px; }
+.portrait-frame__corner--tr { top: -6px;    right: -6px; border-top-width: 2px;    border-right-width: 2px; }
+.portrait-frame__corner--bl { bottom: -6px; left: -6px;  border-bottom-width: 2px; border-left-width: 2px; }
+.portrait-frame__corner--br { bottom: -6px; right: -6px; border-bottom-width: 2px; border-right-width: 2px; }
+
+/* ---------- Texto ---------- */
+.about__content {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.about__text {
+  display: grid;
+  gap: var(--sp-4);
+  color: var(--c-text-muted);
+  font-size: var(--fs-md);
+  max-width: 60ch;
+}
+
+/* ---------- Bloque de impacto ----------
+   Frase destacada con barra de gradiente a la izquierda y fondo teñido. */
+.about__impact {
+  position: relative;
+  margin-top: var(--sp-3);
+  padding: var(--sp-5) var(--sp-6);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background:
+    linear-gradient(100deg, rgba(var(--c-teal-rgb), 0.12), rgba(var(--c-indigo-rgb), 0.08) 60%, transparent);
+  font-family: var(--ff-display);
+  font-size: clamp(1.3125rem, 1.15rem + 0.6vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--c-text);
+}
+
+.about__impact::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--c-teal), var(--c-indigo), var(--c-coral));
+}
+
+.about__impact strong {
+  font-weight: 700;
+  background: var(--grad-cool);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

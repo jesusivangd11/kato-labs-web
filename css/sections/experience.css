@@ -1,0 +1,87 @@
+/* ==========================================================================
+   SECCIÓN: TRAYECTORIA (experiencia y formación)
+   Experiencia = turquesa, Formación = índigo (.tone-* en el HTML)
+   ========================================================================== */
+
+/* Resplandor coral abajo a la izquierda */
+.experience {
+  --glow-rgb: var(--c-coral-rgb);
+  --glow-x: -25%;
+  --glow-y: 30%;
+}
+
+.experience__grid {
+  display: grid;
+  gap: var(--sp-8);
+}
+
+@media (min-width: 860px) {
+  .experience__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-7);
+  }
+}
+
+.experience__heading {
+  font-family: var(--ff-display);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--tone);
+  padding-bottom: var(--sp-4);
+  margin-bottom: var(--sp-2);
+  border-bottom: 2px solid var(--tone);
+}
+
+.timeline__item {
+  position: relative;
+  display: grid;
+  gap: var(--sp-1);
+  padding-block: var(--sp-5);
+  border-bottom: 1px solid var(--c-line);
+  transition: padding-left var(--dur-med) var(--ease-out);
+}
+
+/* Barra de color que aparece a la izquierda al pasar el mouse */
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--sp-5);
+  bottom: var(--sp-5);
+  width: 2px;
+  background: var(--tone);
+  transform: scaleY(0);
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.timeline__item:hover {
+  padding-left: var(--sp-4);
+}
+
+.timeline__item:hover::before {
+  transform: scaleY(1);
+}
+
+.timeline__date {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--tone);
+  margin-bottom: var(--sp-1);
+}
+
+.timeline__title {
+  font-size: var(--fs-lg);
+}
+
+.timeline__place {
+  color: var(--c-amber);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.timeline__desc {
+  color: var(--c-text-muted);
+  font-size: var(--fs-base);
+  margin-top: var(--sp-2);
+  max-width: 52ch;
+}

@@ -1,0 +1,122 @@
+/* ==========================================================================
+   COMPONENTE: VISOR DE CAPTURAS (lightbox)
+   --------------------------------------------------------------------------
+   Se abre al hacer clic en la portada o en una miniatura de un proyecto con
+   `gallery`. Flechas del teclado, deslizar en el celular y botones laterales
+   para moverse entre las capturas; Esc o clic fuera para cerrar.
+   ========================================================================== */
+
+html.lightbox-open {
+  overflow: hidden;
+}
+
+.project-card__media[role="button"] {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-5) var(--sp-3);
+  background: rgba(5, 7, 14, 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox__figure {
+  display: grid;
+  gap: var(--sp-3);
+  justify-items: center;
+  margin: 0;
+  min-width: 0;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: calc(100vh - 9rem);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+  object-fit: contain;
+}
+
+.lightbox__caption {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  color: #d5daea;
+  text-align: center;
+}
+
+.lightbox__count {
+  font-family: var(--ff-mono);
+  font-size: 0.8em;
+  color: #8f98b5;
+}
+
+.lightbox__btn {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--dur-fast, 0.15s) ease;
+}
+
+.lightbox__btn:hover,
+.lightbox__btn:focus-visible {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  z-index: 1;
+}
+
+.lightbox.is-single .lightbox__nav {
+  visibility: hidden;
+}
+
+/* Móvil: flechas sobre la imagen para dar más espacio (también se desliza) */
+@media (max-width: 640px) {
+  .lightbox {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 4rem var(--sp-3) var(--sp-4);
+  }
+
+  .lightbox__nav {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+    width: 2.4rem;
+    height: 2.4rem;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .lightbox__nav--prev { left: var(--sp-2); }
+  .lightbox__nav--next { right: var(--sp-2); }
+
+  .lightbox__img {
+    max-height: calc(100vh - 10rem);
+  }
+}

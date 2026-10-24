@@ -1,0 +1,78 @@
+/* ==========================================================================
+   ANIMACIONES
+   --------------------------------------------------------------------------
+   Keyframes y sistema de aparición al hacer scroll.
+
+   Uso en HTML:
+     <div data-reveal>...</div>                 → aparece al entrar en pantalla
+     <div data-reveal data-reveal-delay="2">    → con retraso (1 a 6, ×80ms)
+
+   La clase .js la agrega js/modules/theme.js. Si JavaScript está
+   desactivado, todo el contenido se ve normal (no queda oculto).
+   ========================================================================== */
+
+.js [data-reveal] {
+  opacity: 0;
+}
+
+/* Se usa animation + la propiedad "translate" (no transition/transform)
+   para no interferir con los efectos hover de cada componente. */
+.js [data-reveal].is-visible {
+  animation: reveal-in var(--dur-slow) var(--ease-out) both;
+  animation-delay: calc(var(--reveal-delay, 0) * 80ms);
+}
+
+[data-reveal-delay="1"] { --reveal-delay: 1; }
+[data-reveal-delay="2"] { --reveal-delay: 2; }
+[data-reveal-delay="3"] { --reveal-delay: 3; }
+[data-reveal-delay="4"] { --reveal-delay: 4; }
+[data-reveal-delay="5"] { --reveal-delay: 5; }
+[data-reveal-delay="6"] { --reveal-delay: 6; }
+
+/* ---------- Keyframes ---------- */
+
+/* Entrada del título del hero: cada línea sube desde una máscara */
+@keyframes line-up {
+  from { transform: translateY(105%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Movimiento lento de las manchas de color del hero */
+@keyframes blob-drift-a {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-6vw, 4vh) scale(1.08); }
+  100% { transform: translate(3vw, 8vh) scale(0.95); }
+}
+
+@keyframes blob-drift-b {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(5vw, -6vh) scale(0.92); }
+  100% { transform: translate(-4vw, 3vh) scale(1.06); }
+}
+
+/* Desplaza un gradiente de fondo (texto y bordes con gradiente) */
+@keyframes gradient-pan {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; translate: 0 28px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+@keyframes card-in {
+  from { opacity: 0; translate: 0 16px; scale: 0.98; }
+  to   { opacity: 1; translate: 0 0; scale: 1; }
+}
+
+@keyframes scroll-hint {
+  0%   { transform: translateY(-100%); }
+  60%  { transform: translateY(100%); }
+  100% { transform: translateY(100%); }
+}

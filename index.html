@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  VERTEX LABS — Portafolio de Jesús García
+  ----------------------------------------------------------------------------
+  Estructura del documento:
+    0. <head>: metadatos, fuentes, hojas de estilo
+    1. Sprite de iconos SVG (se reutilizan con <use href="#i-...">)
+    2. Header / navegación
+    3. #inicio       → Hero
+    4. #sobre-mi     → Sobre mí
+    5. #habilidades  → Tecnologías y habilidades
+    6. #proyectos    → Proyectos (se generan desde js/data/projects.js)
+    7. #proceso      → Cómo trabajo
+    8. #trayectoria  → Experiencia y formación
+    9. #contacto     → Contacto
+   10. Footer y scripts
+
+  Busca "TODO" en este archivo para encontrar los datos que debes completar.
+  ============================================================================
+-->
+<html lang="es" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO básico -->
+  <title>Jesús García — Kato Labs | Desarrollo web y estrategia digital</title>
+  <meta name="description" content="Jesús García (Kato Labs), desarrollador web en Chihuahua, México. Ayudo a negocios a crecer y ser visibles en internet con sitios web, landing pages y estrategias tecnológicas.">
+  <meta name="author" content="Jesús García">
+  <meta name="theme-color" content="#0A0D18">
+
+  <!-- Vista previa al compartir en redes (LinkedIn, WhatsApp, etc.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jesús García — Kato Labs">
+  <meta property="og:description" content="Desarrollo web y estrategias tecnológicas para hacer crecer tu negocio.">
+  <!-- TODO: cuando tengas una imagen de portada, descomenta y ajusta la ruta -->
+  <!-- <meta property="og:image" content="assets/img/og-cover.png"> -->
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <!-- Tema guardado: se aplica antes de pintar para evitar parpadeo -->
+  <script src="js/modules/theme.js?v=20261016d"></script>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Estilos: el orden importa (base → componentes → secciones → utilidades)
+       "?v=..." obliga al navegador a descargar la versión nueva. Cuando cambies
+       un CSS o JS, cambia ese número en todos los enlaces (busca "?v="). -->
+  <link rel="stylesheet" href="css/base/variables.css?v=20261016d">
+  <link rel="stylesheet" href="css/base/reset.css?v=20261016d">
+  <link rel="stylesheet" href="css/base/typography.css?v=20261016d">
+  <link rel="stylesheet" href="css/base/layout.css?v=20261016d">
+
+  <link rel="stylesheet" href="css/components/buttons.css?v=20261016d">
+  <link rel="stylesheet" href="css/components/header.css?v=20261016d">
+  <link rel="stylesheet" href="css/components/tags.css?v=20261016d">
+  <link rel="stylesheet" href="css/components/project-card.css?v=20261016d">
+  <link rel="stylesheet" href="css/components/lightbox.css?v=20261023a">
+  <link rel="stylesheet" href="css/components/footer.css?v=20261016d">
+
+  <link rel="stylesheet" href="css/sections/hero.css?v=20261016d">
+  <link rel="stylesheet" href="css/sections/about.css?v=20261016d">
+  <link rel="stylesheet" href="css/sections/skills.css?v=20261016d">
+  <link rel="stylesheet" href="css/sections/projects.css?v=20261016d">
+  <link rel="stylesheet" href="css/sections/process.css?v=20261016d">
+  <link rel="stylesheet" href="css/sections/experience.css?v=20261016d">
+  <link rel="stylesheet" href="css/sections/contact.css?v=20261016d">
+
+  <link rel="stylesheet" href="css/utilities/animations.css?v=20261016d">
+</head>
+
+<body>
+  <!-- ======================================================================
+       1. SPRITE DE ICONOS
+       Para usar un icono: <svg><use href="#i-nombre"></use></svg>
+       ====================================================================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-vertex" viewBox="0 0 32 32">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M16 5 27 25H5Z"/>
+        <path d="M16 5v13M27 25l-11-7M5 25l11-7" opacity=".45"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="16" cy="5" r="2.6"/><circle cx="27" cy="25" r="2.6"/>
+        <circle cx="5" cy="25" r="2.6"/><circle cx="16" cy="18" r="1.8"/>
+      </g>
+    </symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m5 12 5 5 9-10"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></g></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Zm-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.83 9.83 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88Zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.8V24C19.62 23.1 24 18.1 24 12.07Z"/></symbol>
+    <symbol id="i-crosshair" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="24" r="14" stroke-dasharray="3 4"/><path d="M24 4v10M24 34v10M4 24h10M34 24h10"/><circle cx="24" cy="24" r="2.5" fill="currentColor"/></g></symbol>
+  </svg>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ======================================================================
+       2. HEADER / NAVEGACIÓN
+       ====================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#inicio" aria-label="Kato Labs, ir al inicio">
+        <!--
+          Logo + animación: el SVG usa el mismo sistema de coordenadas que la
+          imagen (432×120) y dibuja encima el circuito de la "T", que "crece"
+          como raíces al cargar la página. Estilos en css/components/header.css
+        -->
+        <span class="brand__logo-wrap">
+          <img class="brand__logo" src="assets/img/brand/kato-logo.png" alt="" width="137" height="38">
+          <svg class="brand__roots" viewBox="0 0 432 120" aria-hidden="true">
+            <!-- Circuito: del nodo izquierdo, por la barra de la T y baja por el tallo -->
+            <path class="roots-line" pathLength="1" d="M223 13 H263 Q268 13 268 19 V112"/>
+            <!-- Ramas con nodos (lado izquierdo de la hoja) -->
+            <path class="roots-line roots-line--b1" pathLength="1" d="M267 62 L257 54"/>
+            <path class="roots-line roots-line--b2" pathLength="1" d="M267 88 L256 78"/>
+            <!-- Venas de la hoja (lado derecho) -->
+            <path class="roots-line roots-line--v1" pathLength="1" d="M269 61 L287 44"/>
+            <path class="roots-line roots-line--v2" pathLength="1" d="M269 89 L292 67"/>
+            <!-- Nodos -->
+            <circle class="roots-node" cx="218" cy="13" r="4.5"/>
+            <circle class="roots-node roots-node--b1" cx="253" cy="50" r="4.2"/>
+            <circle class="roots-node roots-node--b2" cx="251" cy="74" r="4.2"/>
+            <!-- Chispa que recorre el circuito en bucle -->
+            <path class="roots-pulse" pathLength="1" d="M223 13 H263 Q268 13 268 19 V112"/>
+          </svg>
+        </span>
+        <span class="brand__name">Kato<span class="brand__sub"> Labs</span></span>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#habilidades">Habilidades</a></li>
+          <li><a class="nav__link" href="#proyectos">Proyectos</a></li>
+          <li><a class="nav__link" href="#proceso">Proceso</a></li>
+          <li><a class="nav__link" href="#trayectoria">Trayectoria</a></li>
+          <li><a class="nav__link" href="#sobre-mi">Sobre mí</a></li>
+          <li><a class="nav__link" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <button class="btn btn--icon theme-toggle" type="button" id="theme-toggle" aria-label="Cambiar tema claro/oscuro">
+          <svg class="icon-moon"><use href="#i-moon"></use></svg>
+          <svg class="icon-sun"><use href="#i-sun"></use></svg>
+        </button>
+        <a class="btn btn--primary site-header__cta" href="#contacto">Hablemos</a>
+        <button class="nav-toggle" type="button" id="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+          <span class="nav-toggle__bars"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ====================================================================
+         3. HERO
+         El fondo animado (red de vértices) se dibuja en el <canvas>
+         desde js/modules/vertex-field.js
+         ==================================================================== -->
+    <section class="hero" id="inicio">
+      <!-- Manchas de color difuminadas (se mueven lentamente). Ver hero.css -->
+      <div class="hero__blobs" aria-hidden="true">
+        <span class="blob blob--teal"></span>
+        <span class="blob blob--indigo"></span>
+        <span class="blob blob--coral"></span>
+        <span class="blob blob--amber"></span>
+      </div>
+      <canvas class="hero__canvas" id="vertex-field" aria-hidden="true"></canvas>
+      <div class="hero__veil" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <div class="hero__top">
+          <!-- Leyenda: los cuatro colores de la marca y lo que representan -->
+          <ul class="vertex-legend" aria-label="Áreas de trabajo">
+            <li class="tone-teal">Desarrollo web</li>
+            <li class="tone-indigo">Estrategia digital</li>
+            <li class="tone-amber">Inteligencia artificial</li>
+            <li class="tone-coral">Redes sociales</li>
+          </ul>
+        </div>
+
+        <h1 class="hero__title">
+          <span class="hero__line"><span>Construyo software</span></span>
+          <span class="hero__line"><span>desde el <em>vértice</em></span></span>
+          <span class="hero__line"><span>donde todo conecta.</span></span>
+        </h1>
+
+        <div class="hero__bottom">
+          <p class="hero__intro">
+            Soy <strong>Jesús García</strong>, desarrollador web detrás de
+            <strong>Kato Labs</strong>. Ayudo a negocios a crecer en internet con
+            sitios web, landing pages y estrategias tecnológicas que los hacen
+            visibles y les acercan nuevos clientes.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#proyectos">
+              Ver proyectos
+              <svg><use href="#i-arrow-right"></use></svg>
+            </a>
+            <!-- El CV está en assets/docs/cv.pdf (reemplaza ese archivo para actualizarlo) -->
+            <a class="btn btn--ghost" href="assets/docs/cv.pdf" download>
+              Descargar CV
+              <svg><use href="#i-download"></use></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Datos rápidos -->
+        <dl class="hero__meta">
+          <div>
+            <dt>Enfoque</dt>
+            <dd>Desarrollo web</dd>
+          </div>
+          <div>
+            <dt>Ubicación</dt>
+            <dd>Chihuahua, Chih. México</dd>
+          </div>
+          <div>
+            <dt>Idiomas</dt>
+            <dd>Español · Inglés</dd>
+          </div>
+        </dl>
+      </div>
+
+      <a class="hero__scroll" href="#habilidades" aria-label="Bajar a Habilidades">
+        <span class="mono">Scroll</span>
+        <span class="hero__scroll-line"></span>
+      </a>
+    </section>
+
+    <!-- ====================================================================
+         4. SOBRE MÍ
+         ==================================================================== -->
+    <!-- ====================================================================
+         5. TECNOLOGÍAS Y HABILIDADES
+         Para agregar una: copia un <li class="skill"> completo.
+         Color (clase tone-*):  teal = Desarrollo · indigo = Plataformas y
+         herramientas · amber = Estrategia digital · coral = Infraestructura
+         ==================================================================== -->
+    <section class="section skills" id="habilidades">
+      <div class="container">
+        <header class="section-head section-head--split">
+          <p class="eyebrow" data-reveal>Tecnologías y habilidades</p>
+          <h2 class="section-title" data-reveal data-reveal-delay="1">
+            ¿Cómo ayudo a <em>impulsar</em> un negocio?
+          </h2>
+          <p class="lead" data-reveal data-reveal-delay="2">
+            Desarrollo, plataformas, estrategia digital e infraestructura: todo lo
+            necesario para llevar a un negocio de cero a visible en internet.
+          </p>
+        </header>
+
+        <!-- Qué significa cada color -->
+        <ul class="vertex-legend skills__legend" aria-label="Tipos de habilidad" data-reveal>
+          <li class="tone-teal">Desarrollo</li>
+          <li class="tone-indigo">Plataformas y herramientas</li>
+          <li class="tone-amber">Estrategia digital</li>
+          <li class="tone-coral">Infraestructura</li>
+        </ul>
+
+        <ul class="skills__grid">
+          <li class="skill tone-teal" data-reveal>
+            <h3 class="skill__name">HTML</h3>
+            <p class="skill__desc">Estructura semántica y accesible para cada página.</p>
+          </li>
+          <li class="skill tone-teal" data-reveal data-reveal-delay="1">
+            <h3 class="skill__name">CSS</h3>
+            <p class="skill__desc">Diseño responsivo que se ve bien en celular, tableta y computadora.</p>
+          </li>
+          <li class="skill tone-teal" data-reveal data-reveal-delay="2">
+            <h3 class="skill__name">JavaScript</h3>
+            <p class="skill__desc">Interactividad y animaciones que mejoran la experiencia.</p>
+          </li>
+          <li class="skill tone-indigo" data-reveal>
+            <h3 class="skill__name">WordPress</h3>
+            <p class="skill__desc">Sitios y landing pages fáciles de administrar por el cliente.</p>
+          </li>
+          <li class="skill tone-indigo" data-reveal data-reveal-delay="1">
+            <h3 class="skill__name">Bases de datos</h3>
+            <p class="skill__desc">Organización y consulta de la información del negocio.</p>
+          </li>
+          <li class="skill tone-indigo" data-reveal data-reveal-delay="2">
+            <h3 class="skill__name">Git y GitHub</h3>
+            <p class="skill__desc">Control de versiones y seguimiento de cada cambio.</p>
+          </li>
+          <li class="skill tone-indigo" data-reveal data-reveal-delay="3">
+            <h3 class="skill__name">Visual Studio Code</h3>
+            <p class="skill__desc">Entorno de desarrollo para escribir y organizar código.</p>
+          </li>
+          <li class="skill tone-amber" data-reveal>
+            <h3 class="skill__name">Inteligencia artificial</h3>
+            <p class="skill__desc">Claude, ChatGPT, Gemini y Perplexity para desarrollo, depuración y automatizaciones.</p>
+          </li>
+          <li class="skill tone-amber" data-reveal data-reveal-delay="1">
+            <h3 class="skill__name">Redes sociales</h3>
+            <p class="skill__desc">Presencia y contenido para que los negocios sean encontrados.</p>
+          </li>
+          <li class="skill tone-coral" data-reveal data-reveal-delay="2">
+            <h3 class="skill__name">Packet Tracer <span class="skill__sub">Ciberseguridad</span></h3>
+            <p class="skill__desc">Redes de datos, enrutamiento estático y protocolos RIP y EIGRP.</p>
+          </li>
+          <li class="skill tone-coral" data-reveal data-reveal-delay="3">
+            <h3 class="skill__name">Hardware</h3>
+            <p class="skill__desc">Diagnóstico y mantenimiento de equipos de cómputo.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         6. PROYECTOS
+         Las tarjetas NO se escriben aquí: se generan automáticamente desde
+         js/data/projects.js. Edita ese archivo para agregar tus proyectos.
+         ==================================================================== -->
+    <section class="section section--glow projects" id="proyectos">
+      <div class="container">
+        <header class="section-head section-head--split">
+          <p class="eyebrow" data-reveal>Proyectos</p>
+          <h2 class="section-title" data-reveal data-reveal-delay="1">
+            Trabajo <em>seleccionado</em>.
+          </h2>
+          <p class="lead" data-reveal data-reveal-delay="2">
+            Una selección de proyectos personales y académicos. Cada uno resolvió
+            un problema real y me enseñó algo nuevo.
+          </p>
+        </header>
+
+        <!-- Botones de filtro (generados por JS según las categorías) -->
+        <div class="filters" id="project-filters" role="group" aria-label="Filtrar proyectos por categoría" data-reveal></div>
+
+        <div class="projects__grid" id="projects-grid" aria-live="polite">
+          <noscript>
+            <p class="lead">Activa JavaScript para ver los proyectos.</p>
+          </noscript>
+        </div>
+
+        <div class="projects__more" data-reveal>
+          <a class="link-underline" href="https://github.com/jesusivangd11" target="_blank" rel="noopener">
+            Ver todo en GitHub
+            <svg width="16" height="16"><use href="#i-arrow-up-right"></use></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         7. PROCESO: cómo trabajo
+         ==================================================================== -->
+    <section class="section process" id="proceso">
+      <div class="container">
+        <header class="section-head section-head--split">
+          <p class="eyebrow" data-reveal>Proceso</p>
+          <h2 class="section-title" data-reveal data-reveal-delay="1">
+            Cuatro vértices, <em>un sistema</em>.
+          </h2>
+          <p class="lead" data-reveal data-reveal-delay="2">
+            Cómo llevo a un negocio de la idea a tener presencia digital real.
+          </p>
+        </header>
+
+        <ol class="process__list">
+          <li class="process-step tone-teal" data-reveal>
+            <span class="process-step__node" aria-hidden="true"></span>
+            <h3>Entender</h3>
+            <p>Conozco tu negocio, a tus clientes y lo que necesitas lograr en internet.</p>
+          </li>
+          <li class="process-step tone-indigo" data-reveal data-reveal-delay="1">
+            <span class="process-step__node" aria-hidden="true"></span>
+            <h3>Diseñar</h3>
+            <p>Defino la estrategia, la estructura del sitio y cómo se va a ver.</p>
+          </li>
+          <li class="process-step tone-amber" data-reveal data-reveal-delay="2">
+            <span class="process-step__node" aria-hidden="true"></span>
+            <h3>Construir</h3>
+            <p>Desarrollo el sitio responsivo, rápido y listo para atraer clientes.</p>
+          </li>
+          <li class="process-step tone-coral" data-reveal data-reveal-delay="3">
+            <span class="process-step__node" aria-hidden="true"></span>
+            <h3>Crecer</h3>
+            <p>Mido resultados, ajusto y acompaño al negocio para que siga creciendo.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         8. TRAYECTORIA: experiencia y formación (datos del CV)
+         Copia un <li class="timeline__item"> completo para agregar más.
+         ==================================================================== -->
+    <section class="section section--glow experience" id="trayectoria">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>Trayectoria</p>
+          <h2 class="section-title" data-reveal data-reveal-delay="1">
+            Experiencia y <em>formación</em>.
+          </h2>
+        </header>
+
+        <div class="experience__grid">
+          <div class="experience__col tone-teal">
+            <h3 class="experience__heading">Experiencia</h3>
+            <ol class="timeline">
+              <li class="timeline__item" data-reveal>
+                <span class="timeline__date">Actualidad</span>
+                <h4 class="timeline__title">Fundador y desarrollador web</h4>
+                <p class="timeline__place">Kato Labs</p>
+                <p class="timeline__desc">
+                  Sitios web, landing pages y estrategias digitales para negocios
+                  que buscan presencia y nuevos clientes en internet.
+                </p>
+              </li>
+              <li class="timeline__item" data-reveal data-reveal-delay="1">
+                <span class="timeline__date">Proyectos web</span>
+                <h4 class="timeline__title">Desarrollo de páginas web</h4>
+                <p class="timeline__place">HTML · CSS · WordPress</p>
+                <p class="timeline__desc">
+                  Páginas web estáticas y landing pages desarrolladas a la medida
+                  de cada negocio.
+                </p>
+              </li>
+              <li class="timeline__item" data-reveal data-reveal-delay="2">
+                <span class="timeline__date">Proyectos web</span>
+                <h4 class="timeline__title">Diseño de interfaces responsivas</h4>
+                <p class="timeline__place">Celular · Tableta · Computadora</p>
+                <p class="timeline__desc">
+                  Diseño y adaptación de interfaces para que se vean y funcionen
+                  correctamente en cualquier dispositivo.
+                </p>
+              </li>
+              <li class="timeline__item" data-reveal data-reveal-delay="3">
+                <span class="timeline__date">Proyectos académicos</span>
+                <h4 class="timeline__title">Bases de datos</h4>
+                <p class="timeline__place">Materias de Ingeniería en Sistemas</p>
+                <p class="timeline__desc">
+                  Diseño y manejo de bases de datos en proyectos de la carrera,
+                  como sistemas de punto de venta.
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <div class="experience__col tone-indigo">
+            <h3 class="experience__heading">Formación</h3>
+            <ol class="timeline">
+              <li class="timeline__item" data-reveal data-reveal-delay="1">
+                <span class="timeline__date">En curso · Egreso 2027</span>
+                <h4 class="timeline__title">Ingeniería en Sistemas Computacionales</h4>
+                <p class="timeline__place">Instituto Tecnológico de Chihuahua II</p>
+                <p class="timeline__desc">
+                  Cursando el 8.º y último semestre de la carrera.
+                </p>
+              </li>
+              <li class="timeline__item" data-reveal data-reveal-delay="2">
+                <span class="timeline__date">Idiomas</span>
+                <h4 class="timeline__title">Inglés nivel B2</h4>
+                <p class="timeline__place">Delfin English School · Dublín, Irlanda</p>
+                <p class="timeline__desc">
+                  Estudio del idioma en el extranjero.
+                </p>
+              </li>
+              <li class="timeline__item" data-reveal data-reveal-delay="3">
+                <span class="timeline__date">Redes</span>
+                <h4 class="timeline__title">Conmutación y enrutamiento</h4>
+                <p class="timeline__place">Cisco Packet Tracer</p>
+                <p class="timeline__desc">
+                  Redes de datos con enrutamiento estático y mediante los
+                  protocolos RIP y EIGRP.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--glow about" id="sobre-mi">
+      <div class="container about__grid">
+
+        <figure class="about__portrait" data-reveal>
+          <div class="portrait-frame">
+            <img src="assets/img/profile/perfil.png" alt="Jesús García" loading="lazy">
+            <span class="portrait-frame__corner portrait-frame__corner--tl"></span>
+            <span class="portrait-frame__corner portrait-frame__corner--tr"></span>
+            <span class="portrait-frame__corner portrait-frame__corner--bl"></span>
+            <span class="portrait-frame__corner portrait-frame__corner--br"></span>
+          </div>
+          <figcaption>
+            <strong>Jesús García</strong>
+            <span>Ing. en Sistemas Computacionales · Fundador de Kato Labs</span>
+          </figcaption>
+        </figure>
+
+        <div class="about__content">
+          <p class="eyebrow" data-reveal>Sobre mí</p>
+          <h2 class="section-title" data-reveal data-reveal-delay="1">
+            Hago que tu negocio <em>se vea</em> y crezca en internet.
+          </h2>
+
+          <div class="about__text" data-reveal data-reveal-delay="2">
+            <p>
+              Muchos negocios tienen un gran producto, pero en internet no existen.
+              Mi trabajo es cambiar eso: diseño y desarrollo sitios web, landing pages
+              y estrategias tecnológicas que convierten la presencia digital en
+              clientes reales.
+            </p>
+            <p>
+              Combino desarrollo web, inteligencia artificial y redes sociales para
+              que cada proyecto no solo se vea bien, sino que ayude a vender, a ser
+              encontrado y a crecer. Me adapto rápido a nuevas herramientas y me
+              involucro en entender el negocio antes de proponer la solución.
+            </p>
+          </div>
+
+          <!-- Bloque destacado de impacto -->
+          <blockquote class="about__impact" data-reveal data-reveal-delay="3">
+            <p>
+              He ayudado a negocios que carecían de presencia digital a
+              <strong>volverse visibles en internet</strong>: desde su primera
+              página web hasta su estrategia en redes sociales.
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         9. CONTACTO
+         Correo, WhatsApp y redes se configuran aquí
+         ==================================================================== -->
+    <section class="section contact" id="contacto">
+      <div class="container">
+        <div class="contact__panel">
+          <!-- Malla de color decorativa del panel -->
+          <div class="contact__mesh" aria-hidden="true"></div>
+          <div class="contact__inner">
+            <p class="eyebrow" data-reveal>Contacto</p>
+
+            <h2 class="contact__title" data-reveal data-reveal-delay="1">
+              ¿Construimos algo<br><em>juntos</em>?
+            </h2>
+
+            <p class="lead" data-reveal data-reveal-delay="2">
+              Estoy abierto a vacantes, prácticas y proyectos freelance. Escríbeme y
+              te respondo lo antes posible.
+            </p>
+
+            <div class="contact__email" data-reveal data-reveal-delay="3">
+              <a class="contact__email-link" href="mailto:jesus.ivan.gd11@gmail.com">
+                <svg><use href="#i-mail"></use></svg>
+                <span>jesus.ivan.gd11@gmail.com</span>
+              </a>
+              <button class="btn btn--icon contact__copy" type="button"
+                      data-copy="jesus.ivan.gd11@gmail.com" aria-label="Copiar correo">
+                <svg class="icon-copy"><use href="#i-copy"></use></svg>
+                <svg class="icon-check"><use href="#i-check"></use></svg>
+              </button>
+              <span class="contact__toast mono" role="status" aria-live="polite"></span>
+            </div>
+
+            <!--
+              WHATSAPP (aparece en 2 lugares: aquí y en el footer)
+              Formato: https://wa.me/52 + número a 10 dígitos ?text= mensaje
+              Para cambiar el mensaje edita lo que va después de "text="
+              (los espacios se escriben %20, la coma %2C, "ú" %C3%BA, "í" %C3%AD).
+            -->
+            <a class="contact__whatsapp" data-reveal data-reveal-delay="3"
+               href="https://wa.me/526141336763?text=Hola%20Jes%C3%BAs%2C%20vi%20tu%20portafolio%20de%20Kato%20Labs%20y%20me%20gustar%C3%ADa%20platicar%20contigo%20sobre%20una%20oportunidad."
+               target="_blank" rel="noopener">
+              <span class="contact__whatsapp-icon"><svg><use href="#i-whatsapp"></use></svg></span>
+              <span class="contact__whatsapp-text">
+                <strong>Escríbeme por WhatsApp</strong>
+                <span class="mono">614 133 6763</span>
+              </span>
+              <svg class="contact__whatsapp-arrow"><use href="#i-arrow-right"></use></svg>
+            </a>
+
+            <!-- TODO: LinkedIn todavía usa "TU-USUARIO" -->
+            <ul class="contact__socials" data-reveal data-reveal-delay="4">
+              <li>
+                <a href="https://github.com/jesusivangd11" target="_blank" rel="noopener">
+                  <svg><use href="#i-github"></use></svg>
+                  <span>GitHub</span>
+                  <svg class="contact__arrow"><use href="#i-arrow-up-right"></use></svg>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/TU-USUARIO" target="_blank" rel="noopener">
+                  <svg><use href="#i-linkedin"></use></svg>
+                  <span>LinkedIn</span>
+                  <svg class="contact__arrow"><use href="#i-arrow-up-right"></use></svg>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/vertex_labs_tech/" target="_blank" rel="noopener">
+                  <svg><use href="#i-instagram"></use></svg>
+                  <span>Instagram</span>
+                  <svg class="contact__arrow"><use href="#i-arrow-up-right"></use></svg>
+                </a>
+              </li>
+              <li>
+                <a href="assets/docs/cv.pdf" download>
+                  <svg><use href="#i-download"></use></svg>
+                  <span>Currículum</span>
+                  <svg class="contact__arrow"><use href="#i-arrow-up-right"></use></svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       10. FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <!-- Parte superior: marca + redes sociales -->
+    <div class="container site-footer__top">
+      <div class="site-footer__brand">
+        <a class="brand" href="#inicio" aria-label="Kato Labs, ir al inicio">
+          <img class="brand__logo" src="assets/img/brand/kato-logo.png" alt="" width="137" height="38">
+          <span class="brand__name">Kato<span class="brand__sub"> Labs</span></span>
+        </a>
+        <p class="site-footer__tagline">Software que conecta ideas, datos y personas.</p>
+      </div>
+
+      <!-- TODO: LinkedIn todavía usa "TU-USUARIO" -->
+      <nav class="site-footer__social" aria-label="Redes sociales">
+        <p class="site-footer__label">Encuéntrame en</p>
+        <ul>
+          <li class="tone-coral">
+            <a href="https://www.instagram.com/vertex_labs_tech/" target="_blank" rel="noopener">
+              <svg><use href="#i-instagram"></use></svg><span>Instagram</span>
+            </a>
+          </li>
+          <li class="tone-indigo">
+            <a href="https://www.facebook.com/profile.php?id=61595503166496" target="_blank" rel="noopener">
+              <svg><use href="#i-facebook"></use></svg><span>Facebook</span>
+            </a>
+          </li>
+          <li class="tone-teal">
+            <a href="https://wa.me/526141336763?text=Hola%20Jes%C3%BAs%2C%20vi%20tu%20portafolio%20de%20Kato%20Labs%20y%20me%20gustar%C3%ADa%20platicar%20contigo%20sobre%20una%20oportunidad." target="_blank" rel="noopener">
+              <svg><use href="#i-whatsapp"></use></svg><span>WhatsApp</span>
+            </a>
+          </li>
+          <li class="tone-amber">
+            <a href="https://github.com/jesusivangd11" target="_blank" rel="noopener">
+              <svg><use href="#i-github"></use></svg><span>GitHub</span>
+            </a>
+          </li>
+          <li class="tone-indigo">
+            <a href="https://www.linkedin.com/in/TU-USUARIO" target="_blank" rel="noopener">
+              <svg><use href="#i-linkedin"></use></svg><span>LinkedIn</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Parte inferior: créditos + volver arriba -->
+    <div class="container site-footer__bottom">
+      <p class="site-footer__meta">© <span data-year></span> Jesús García · Kato Labs</p>
+      <a class="back-to-top" href="#inicio">
+        Volver arriba
+        <svg><use href="#i-arrow-up"></use></svg>
+      </a>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       SCRIPTS (orden: datos → módulos → main)
+       Son scripts clásicos (no ES modules) para que el sitio funcione
+       abriendo index.html directamente, sin servidor.
+       ====================================================================== -->
+  <script src="js/data/projects.js?v=20261016d" defer></script>
+  <script src="js/modules/nav.js?v=20261016d" defer></script>
+  <script src="js/modules/reveal.js?v=20261016d" defer></script>
+  <script src="js/modules/vertex-field.js?v=20261016d" defer></script>
+  <script src="js/modules/projects.js?v=20261016d" defer></script>
+  <script src="js/modules/contact.js?v=20261016d" defer></script>
+  <script src="js/main.js?v=20261016d" defer></script>
+</body>
+</html>

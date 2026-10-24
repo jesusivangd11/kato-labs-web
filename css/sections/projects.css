@@ -1,0 +1,101 @@
+/* ==========================================================================
+   SECCIÓN: PROYECTOS
+   (El estilo de cada tarjeta está en css/components/project-card.css)
+   ========================================================================== */
+
+/* Resplandor turquesa a la derecha */
+.projects {
+  --glow-rgb: var(--c-teal-rgb);
+  --glow-x: 55%;
+  --glow-y: 5%;
+}
+
+/* ---------- Filtros ---------- */
+/* Pestañas con subrayado de color (no cápsulas) */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 clamp(1.25rem, 0.8rem + 1.5vw, 2.25rem);
+  margin-bottom: var(--sp-6);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.filter-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) 0;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--c-text-muted);
+  transition: color var(--dur-fast) ease;
+}
+
+/* Rombo de color de la categoría (clase .tone-* puesta por projects.js) */
+.filter-btn[class*="tone-"]::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--tone);
+  transform: rotate(45deg);
+}
+
+/* Subrayado que crece en la pestaña activa */
+.filter-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--tone, var(--c-text));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.filter-btn:hover {
+  color: var(--c-text);
+}
+
+.filter-btn[aria-pressed="true"] {
+  color: var(--c-text);
+}
+
+.filter-btn[aria-pressed="true"]::after {
+  transform: scaleX(1);
+}
+
+/* Contador como superíndice */
+.filter-btn__count {
+  align-self: flex-start;
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  color: var(--tone, var(--c-text-faint));
+}
+
+/* ---------- Cuadrícula ---------- */
+.projects__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-5);
+}
+
+@media (min-width: 640px) {
+  .projects__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .projects__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.projects__more {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--sp-7);
+}

@@ -1,0 +1,329 @@
+/* ==========================================================================
+   SECCIÓN: HERO
+   --------------------------------------------------------------------------
+   - Manchas de color difuminadas (.hero__blobs) que se mueven lentamente
+   - Canvas de fondo con la red de vértices (js/modules/vertex-field.js)
+   - Título con entrada línea por línea y palabra clave en gradiente
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: calc(var(--header-h) + var(--sp-6));
+  padding-bottom: var(--sp-8);
+  overflow: clip; /* recorta sin permitir desplazamiento lateral */
+}
+
+/* ---------- Manchas de color ---------- */
+.hero__blobs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: clip; /* recorta sin permitir desplazamiento lateral */
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: var(--blob-opacity);
+  will-change: transform;
+}
+
+.blob--teal {
+  width: 46vw; height: 46vw;
+  top: -12%; right: -8%;
+  background: radial-gradient(circle, rgba(var(--c-teal-rgb), 0.9), transparent 65%);
+  animation: blob-drift-a 22s var(--ease-in-out) infinite alternate;
+}
+
+.blob--indigo {
+  width: 40vw; height: 40vw;
+  top: 30%; right: 18%;
+  background: radial-gradient(circle, rgba(var(--c-indigo-rgb), 0.9), transparent 65%);
+  animation: blob-drift-b 26s var(--ease-in-out) infinite alternate;
+}
+
+.blob--coral {
+  width: 30vw; height: 30vw;
+  bottom: -14%; right: -4%;
+  background: radial-gradient(circle, rgba(var(--c-coral-rgb), 0.8), transparent 65%);
+  animation: blob-drift-a 30s var(--ease-in-out) infinite alternate-reverse;
+}
+
+.blob--amber {
+  width: 26vw; height: 26vw;
+  bottom: -10%; left: -8%;
+  background: radial-gradient(circle, rgba(var(--c-amber-rgb), 0.7), transparent 65%);
+  animation: blob-drift-b 24s var(--ease-in-out) infinite alternate-reverse;
+}
+
+/* En móvil las manchas son más grandes (relativas al ancho) */
+@media (max-width: 700px) {
+  .blob--teal   { width: 90vw; height: 90vw; }
+  .blob--indigo { width: 80vw; height: 80vw; top: 40%; right: -20%; }
+  .blob--coral  { width: 60vw; height: 60vw; }
+  .blob--amber  { width: 60vw; height: 60vw; }
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Velo: suaviza el lado del texto y funde el hero con la siguiente sección */
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(var(--c-bg-rgb), 0.55) 0%, transparent 60%),
+    linear-gradient(to bottom, transparent 75%, var(--c-bg) 100%);
+}
+
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(1.75rem, 1rem + 2.5vw, 3rem);
+  pointer-events: none; /* deja pasar el mouse al canvas... */
+}
+
+.hero__inner a,
+.hero__inner button {
+  pointer-events: auto; /* ...pero los enlaces siguen funcionando */
+}
+
+.hero__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  animation: fade-up var(--dur-slow) var(--ease-out) 0.1s both;
+}
+
+/* Leyenda de los cuatro colores de marca.
+   Fila de texto con rombos (vértices) y separadores verticales:
+   ◆ BACKEND │ ◆ WEB │ ◆ MÓVIL │ ◆ DATOS */
+.vertex-legend {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.vertex-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-inline: 1rem;
+  color: var(--c-text);
+  border-left: 1px solid var(--c-line-strong);
+  transition: color var(--dur-fast) ease;
+}
+
+.vertex-legend li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.vertex-legend li:last-child {
+  padding-right: 0;
+}
+
+/* Rombo del color del área */
+.vertex-legend li::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--tone);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px rgba(var(--tone-rgb), 0.8);
+}
+
+.vertex-legend li:hover {
+  color: var(--tone);
+}
+
+/* En pantallas angostas la fila se parte: sin separadores, solo espacio */
+@media (max-width: 600px) {
+  .vertex-legend {
+    gap: var(--sp-2) var(--sp-5);
+  }
+
+  .vertex-legend li {
+    padding-inline: 0;
+    border-left: 0;
+  }
+}
+
+/* ---------- Título ---------- */
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+/* Cada línea es una máscara; el span interior sube desde abajo */
+.hero__line {
+  display: block;
+  overflow: hidden;
+  /* Espacio extra para que no se corten letras como "y", "g", "j";
+     el margen negativo compensa para no separar las líneas */
+  padding-bottom: 0.16em;
+  margin-bottom: -0.1em;
+}
+
+.hero__line > span {
+  display: inline-block;
+  animation: line-up 1.1s var(--ease-out) both;
+}
+
+.hero__line:nth-child(1) > span { animation-delay: 0.15s; }
+.hero__line:nth-child(2) > span { animation-delay: 0.27s; }
+.hero__line:nth-child(3) > span { animation-delay: 0.39s; }
+
+/* Palabra clave con gradiente de marca */
+.hero__title em {
+  font-style: normal;
+  background: var(--grad-brand);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 8s ease-in-out infinite alternate;
+}
+
+/* Segunda línea desplazada: rompe la alineación y crea ritmo */
+@media (min-width: 860px) {
+  .hero__line:nth-child(2) {
+    padding-left: 1.4em;
+  }
+}
+
+/* ---------- Parte inferior ---------- */
+.hero__bottom {
+  display: grid;
+  gap: var(--sp-5);
+  animation: fade-up var(--dur-slow) var(--ease-out) 0.6s both;
+}
+
+@media (min-width: 860px) {
+  .hero__bottom {
+    grid-template-columns: minmax(0, 32rem) auto;
+    justify-content: space-between;
+    align-items: end;
+  }
+}
+
+.hero__intro {
+  font-size: var(--fs-md);
+  color: var(--c-text-muted);
+  max-width: 34rem;
+}
+
+.hero__intro strong {
+  color: var(--c-text);
+  font-weight: 600;
+}
+
+.hero__intro strong:last-of-type {
+  color: var(--c-accent);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+/* ---------- Datos rápidos ---------- */
+/* Los tres datos se reparten a lo ancho (space-between) */
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-top: 1px solid var(--c-line);
+  padding-top: var(--sp-5);
+  gap: var(--sp-5) var(--sp-6);
+  animation: fade-up var(--dur-slow) var(--ease-out) 0.8s both;
+}
+
+.hero__meta dt {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-text-muted);
+  margin-bottom: var(--sp-1);
+}
+
+/* Pequeño marcador de color antes de cada dato */
+.hero__meta dt::before {
+  content: "";
+  width: 14px;
+  height: 2px;
+  background: var(--c-teal);
+}
+
+.hero__meta div:nth-child(2) dt::before { background: var(--c-indigo); }
+.hero__meta div:nth-child(3) dt::before { background: var(--c-amber); }
+
+.hero__meta dd {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--c-text);
+}
+
+/* ---------- Indicador de scroll ---------- */
+.hero__scroll {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--sp-6);
+  z-index: 1;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  color: var(--c-text-faint);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.hero__scroll-line {
+  position: relative;
+  width: 1px;
+  height: 56px;
+  background: var(--c-line);
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c-accent);
+  animation: scroll-hint 2.2s var(--ease-in-out) infinite;
+}
+
+@media (min-width: 1100px) and (min-height: 760px) {
+  .hero__scroll {
+    display: flex;
+  }
+}

@@ -1,0 +1,146 @@
+/* ==========================================================================
+   FOOTER
+   --------------------------------------------------------------------------
+   .site-footer__top     → marca + frase  |  redes sociales
+   .site-footer__bottom  → créditos       |  volver arriba
+   Cada red social tiene un color de la marca (.tone-* en el HTML).
+   ========================================================================== */
+
+.site-footer {
+  position: relative;
+  border-top: 1px solid var(--c-line);
+  color: var(--c-text-muted);
+  background:
+    radial-gradient(60% 120% at 100% 0%, rgba(var(--c-indigo-rgb), 0.08), transparent 70%),
+    var(--c-bg-elev);
+}
+
+/* Línea de gradiente de marca en el borde superior */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0 auto 0;
+  height: 2px;
+  background: var(--grad-brand);
+  opacity: 0.6;
+}
+
+/* ---------- Parte superior ---------- */
+.site-footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sp-7) var(--sp-8);
+  padding-block: var(--sp-8) var(--sp-7);
+}
+
+.site-footer__brand {
+  display: grid;
+  gap: var(--sp-3);
+  max-width: 22rem;
+}
+
+.site-footer__brand .brand {
+  font-size: var(--fs-lg);
+}
+
+.site-footer__tagline {
+  font-size: var(--fs-md);
+}
+
+.site-footer__label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--c-text-muted);
+  margin-bottom: var(--sp-4);
+}
+
+/* Bloque de redes: ocupa el espacio restante del lado derecho */
+.site-footer__social {
+  flex: 1 1 480px;
+  max-width: 640px;
+}
+
+/* Redes: lista con icono + nombre, separadas por líneas */
+.site-footer__social ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0 var(--sp-6);
+}
+
+.site-footer__social a {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-block: var(--sp-3);
+  border-bottom: 1px solid var(--c-line);
+  font-size: var(--fs-base);
+  color: var(--c-text);
+  transition: color var(--dur-fast) ease, padding-left var(--dur-med) var(--ease-out);
+}
+
+.site-footer__social svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--tone);
+}
+
+.site-footer__social a:hover {
+  color: var(--tone);
+  padding-left: var(--sp-2);
+}
+
+/* ---------- Parte inferior ---------- */
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  position: relative;
+  padding-block: var(--sp-5);
+}
+
+/* Línea divisoria alineada con el contenido (respeta los márgenes) */
+.site-footer__bottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--gutter);
+  right: var(--gutter);
+  height: 1px;
+  background: var(--c-line);
+}
+
+.site-footer__meta {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  color: var(--c-text-faint);
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color var(--dur-fast) ease;
+}
+
+.back-to-top svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.back-to-top:hover {
+  color: var(--c-accent);
+}
+
+.back-to-top:hover svg {
+  transform: translateY(-3px);
+}
