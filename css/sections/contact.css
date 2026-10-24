@@ -42,7 +42,7 @@
   animation: blob-drift-a 18s var(--ease-in-out) infinite alternate;
 }
 
-/* Vértice decorativo: el logo de Kato Labs en grande (SVG en línea) */
+/* Detalle decorativo: el circuito de la "T" del logo en grande (SVG en línea) */
 .contact__panel::after {
   content: "";
   position: absolute;
@@ -53,7 +53,7 @@
   aspect-ratio: 1;
   pointer-events: none;
   opacity: 0.35;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='white' stroke-width='.6'%3E%3Cpath d='M50 8 92 82H8Z'/%3E%3Cpath d='M50 8v50M92 82 50 58M8 82l42-24' stroke-dasharray='2 2'/%3E%3C/g%3E%3Cg fill='white'%3E%3Ccircle cx='50' cy='8' r='2'/%3E%3Ccircle cx='92' cy='82' r='2'/%3E%3Ccircle cx='8' cy='82' r='2'/%3E%3Ccircle cx='50' cy='58' r='1.4'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='208 0 100 120'%3E%3Cg fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M223 13H263Q268 13 268 19V112'/%3E%3Cpath d='M267 62 257 54M267 88 256 78M269 61 287 44M269 89 292 67'/%3E%3C/g%3E%3Cg fill='white'%3E%3Ccircle cx='218' cy='13' r='4.5'/%3E%3Ccircle cx='253' cy='50' r='4.2'/%3E%3Ccircle cx='251' cy='74' r='4.2'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 @media (max-width: 700px) {
