@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.katolabs.com.mx" }],
+      "destination": "https://katolabs.com.mx/$1",
+      "permanent": true
+    }
+  ]
+}

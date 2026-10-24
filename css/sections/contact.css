@@ -113,13 +113,13 @@
   align-items: center;
   gap: var(--sp-3);
   font-family: var(--ff-display);
-  /* Escala con la pantalla para que el correo quepa en una línea en móvil */
-  font-size: clamp(1.0625rem, 0.8rem + 1.6vw, 1.625rem);
+  /* Escala con el ancho de pantalla para que el correo siempre quepa en una línea */
+  font-size: clamp(14px, 4.4vw, 26px);
+  white-space: nowrap;
   font-weight: 600;
   padding-bottom: var(--sp-2);
   border-bottom: 2px solid var(--c-teal);
   transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease;
-  overflow-wrap: anywhere;
 }
 
 .contact__email-link svg {

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://katolabs.com.mx/sitemap.xml

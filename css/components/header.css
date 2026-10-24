@@ -296,6 +296,23 @@
     display: grid;
   }
 
+  /* backdrop-filter haría que el panel .nav (position: fixed) midiera solo lo
+     que mide el header; sin él, el panel cubre toda la pantalla. */
+  .site-header,
+  .site-header.is-scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: color-mix(in srgb, var(--c-bg) 94%, transparent);
+  }
+
+  /* Logo y botones quedan por encima del panel abierto */
+  .site-header .brand,
+  .site-header .theme-toggle,
+  .site-header .nav-toggle {
+    position: relative;
+    z-index: 2;
+  }
+
   .site-header__cta {
     display: none;
   }
