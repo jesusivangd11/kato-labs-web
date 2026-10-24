@@ -173,6 +173,33 @@
   font-size: var(--fs-base);
 }
 
+/* Problema → Solución */
+.project-card__case {
+  display: grid;
+  gap: var(--sp-3);
+  margin: 0;
+}
+
+.project-card__case > div {
+  padding-left: var(--sp-3);
+  border-left: 2px solid rgba(var(--tone-rgb, var(--c-teal-rgb)), 0.45);
+}
+
+.project-card__case dt {
+  margin-bottom: 0.15rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tone, var(--c-teal));
+}
+
+.project-card__case dd {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+}
+
 .project-card__links {
   display: flex;
   flex-wrap: wrap;

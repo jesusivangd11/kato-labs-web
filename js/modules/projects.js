@@ -59,6 +59,11 @@ VX.projects = (function () {
         }).join("") + "</div>"
       : "";
 
+    var caseStudy = "";
+    if (p.problem) caseStudy += "<div><dt>Problema</dt><dd>" + esc(p.problem) + "</dd></div>";
+    if (p.solution) caseStudy += "<div><dt>Solución</dt><dd>" + esc(p.solution) + "</dd></div>";
+    if (caseStudy) caseStudy = '<dl class="project-card__case">' + caseStudy + "</dl>";
+
     var tags = (p.tags || []).map(function (t) {
       return '<li class="tag">' + esc(t) + "</li>";
     }).join("");
@@ -86,6 +91,7 @@ VX.projects = (function () {
           "</div>" +
           '<h3 class="project-card__title">' + esc(p.title) + "</h3>" +
           '<p class="project-card__desc">' + esc(p.description) + "</p>" +
+          caseStudy +
           gallery +
           (tags ? '<ul class="tag-list">' + tags + "</ul>" : "") +
           (links ? '<div class="project-card__links">' + links + "</div>" : "") +

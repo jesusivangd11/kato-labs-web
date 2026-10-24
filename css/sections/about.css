@@ -26,7 +26,7 @@
 .about__portrait {
   display: grid;
   gap: var(--sp-4);
-  max-width: 300px;
+  max-width: 260px;
   width: 100%;
   margin-inline: auto;
 }
@@ -48,7 +48,7 @@
 /* Marco con borde de gradiente de marca */
 .portrait-frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-md);
   background:
     linear-gradient(var(--c-surface), var(--c-surface)) padding-box,

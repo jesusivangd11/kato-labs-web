@@ -8,7 +8,9 @@
    CAMPOS DE CADA PROYECTO
    ┌─────────────┬──────────────────────────────────────────────────────────┐
    │ title       │ (obligatorio) Nombre del proyecto                        │
-   │ description │ (obligatorio) 1–2 frases: qué problema resuelve          │
+   │ description │ (obligatorio) 1 frase: qué es                            │
+   │ problem     │ La problemática que tenía el negocio                     │
+   │ solution    │ Cómo se resolvió                                         │
    │ category    │ (obligatorio) Clave de CATEGORIES (abajo): "web",        │
    │             │  "estrategia", "ia", "redes"                             │
    │ year        │ Año, ej. "2026"                                          │
@@ -74,7 +76,9 @@ VX.PROJECTS = [
 
   {
     title: "FoodPoint · Punto de venta para restaurantes",
-    description: "Sistema de punto de venta para loncherías, fondas y restaurantes: toma la orden, imprime la comanda en cocina y cobra en segundos. Incluye monitor de cocina, combos, respaldos y licencias.",
+    description: "Software de punto de venta para loncherías, fondas y restaurantes, con licencias por negocio.",
+    problem: "Muchas loncherías y fondas toman los pedidos en papel: las comandas se pierden o no se entienden, la cocina no sabe qué orden sigue y en la hora pico cobrar se vuelve lento.",
+    solution: "Un sistema para Windows que toma la orden, imprime la comanda en cocina al momento y cobra en segundos. Incluye monitor de cocina, combos, respaldos e impresoras térmicas.",
     category: "saas",
     year: "2026",
     tags: ["Punto de venta", "Windows", "Impresoras térmicas"],
@@ -85,7 +89,9 @@ VX.PROJECTS = [
   },
   {
     title: "Fajas Colombianas Maydel",
-    description: "Tienda en línea con catálogo por categorías y marcas, carrito, programa de mayoreo para distribuidoras y asesoría de tallas por WhatsApp.",
+    description: "Tienda en línea de fajas colombianas para venta al público y a distribuidoras.",
+    problem: "El negocio vendía principalmente por mensajes: las clientas no podían ver el catálogo completo y atender pedidos de mayoreo y dudas de tallas era manual y lento.",
+    solution: "Una tienda en línea con catálogo por categorías y marcas, carrito, programa de mayoreo para distribuidoras y asesoría de tallas directa por WhatsApp.",
     category: "web",
     year: "2026",
     tags: ["E-commerce", "Mayoreo", "WhatsApp"],
@@ -96,7 +102,9 @@ VX.PROJECTS = [
   },
   {
     title: "Fanny Sáenz BeautyStudio",
-    description: "Sitio para un estudio de belleza en Chihuahua: presenta sus servicios, su ubicación y lleva a las clientas a agendar su cita por WhatsApp.",
+    description: "Sitio web para un estudio de belleza en Chihuahua.",
+    problem: "El estudio dependía solo de redes sociales: a las clientas nuevas les costaba encontrar sus servicios, la ubicación y la forma de agendar.",
+    solution: "Un sitio en WordPress que presenta los servicios y la ubicación, y lleva a cada clienta a agendar su cita por WhatsApp con un clic.",
     category: "web",
     year: "2026",
     tags: ["WordPress", "WhatsApp", "Negocio local"],
@@ -107,7 +115,9 @@ VX.PROJECTS = [
   },
   {
     title: "Catálogo Maestro · Inventario multinegocio",
-    description: "Plataforma para administrar el inventario de varios negocios: productos con variantes y SKU, alta masiva desde fotos y Excel con apoyo de IA, catálogos en PDF y archivos de carga para Mercado Libre y TikTok Shop.",
+    description: "Plataforma web para administrar el inventario de varios negocios desde un solo lugar.",
+    problem: "Llevar el inventario de varios negocios implicaba hojas de Excel separadas, capturar producto por producto y rehacer los archivos para cada canal de venta.",
+    solution: "Una plataforma central con variantes y SKU, alta masiva desde fotos y Excel con apoyo de IA, catálogos en PDF y archivos listos para Mercado Libre y TikTok Shop.",
     category: "web",
     year: "2026",
     tags: ["React", "TypeScript", "Fastify", "PostgreSQL", "Claude API"],
@@ -119,8 +129,9 @@ VX.PROJECTS = [
       { src: "assets/img/projects/catalogo-maestro-detalle.png", alt: "Detalle de producto con variantes" },
       { src: "assets/img/projects/catalogo-maestro-variantes.png", alt: "Variantes y existencias" }
     ],
-    demo: "",
+    demo: "",            // TODO: pega aquí la URL de la demo cuando esté lista y borra "status"
     repo: "https://github.com/jesusivangd11/Sistema-de-Inventario-Maestro",
+    status: "En proceso",
     featured: true,
     reverse: true,
     fit: "contain"
