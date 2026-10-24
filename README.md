@@ -117,7 +117,7 @@ Ya configurados en `index.html`:
 | Red | Dónde aparece | Enlace |
 |-----|---------------|--------|
 | WhatsApp (614 133 6763) | Contacto + footer | `https://wa.me/526141336763?text=...` |
-| Instagram (@vertex_labs_tech) | Contacto + footer | `https://www.instagram.com/vertex_labs_tech/` |
+| Instagram (@kato_labs) | Contacto + footer | `https://www.instagram.com/kato_labs/` |
 | Facebook | Footer | `https://www.facebook.com/profile.php?id=61595503166496` |
 
 **Cambiar el mensaje predeterminado de WhatsApp:** edita el texto después de `text=` en los 2 enlaces `wa.me` (busca `wa.me` en `index.html`). Los espacios se escriben `%20`, la coma `%2C`, la `ú` `%C3%BA` y la `í` `%C3%AD`.

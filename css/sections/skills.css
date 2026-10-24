@@ -12,10 +12,12 @@
   margin-bottom: var(--sp-6);
 }
 
-/* Cuadrícula: las líneas divisorias se forman con el fondo + gap de 1px */
+/* Cuadrícula: las líneas divisorias se forman con el fondo + gap de 1px.
+   Es flex (no grid) para que la última fila se reparta todo el ancho y no
+   quede una celda vacía cuando el número de habilidades no es múltiplo. */
 .skills__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1px;
   background: var(--c-line);
   border: 1px solid var(--c-line);
@@ -25,6 +27,7 @@
 
 .skill {
   position: relative;
+  flex: 1 1 240px;
   display: flex;
   flex-direction: column;
   gap: var(--sp-3);
