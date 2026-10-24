@@ -23,6 +23,14 @@ html {
   }
 }
 
+/* Escritorio: todo el sitio se muestra al 75 % (equivale a tener el navegador
+   en 75 % de zoom). Para cambiar el tamaño, ajusta este valor. */
+@media (min-width: 1280px) {
+  html {
+    zoom: 0.75;
+  }
+}
+
 body {
   font-family: var(--ff-body);
   font-size: var(--fs-base);

@@ -18,6 +18,14 @@
   overflow: clip; /* recorta sin permitir desplazamiento lateral */
 }
 
+/* Con el zoom de escritorio (typography.css) el alto de pantalla se compensa */
+@media (min-width: 1280px) {
+  .hero {
+    min-height: calc(100vh / 0.75);
+    min-height: calc(100svh / 0.75);
+  }
+}
+
 /* ---------- Manchas de color ---------- */
 .hero__blobs {
   position: absolute;
