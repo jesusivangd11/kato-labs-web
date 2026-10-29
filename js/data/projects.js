@@ -88,6 +88,26 @@ VX.PROJECTS = [
     featured: true
   },
   {
+    title: "Maydek · Punto de venta e inventario",
+    description: "Programa de escritorio para Windows con caja, inventario y administración para negocios pequeños.",
+    problem: "Muchos negocios pequeños llevan ventas y existencias en libretas o Excel: los cortes de caja no cuadran, el inventario nunca está al día y no saben cuánto ganan realmente.",
+    solution: "Un solo programa que cobra con lector de código de barras, descuenta el inventario automáticamente y ofrece tablero de ventas, kardex, créditos a clientes y roles de usuario. Funciona sin internet, con la base de datos en la propia computadora.",
+    category: "saas",
+    year: "2026",
+    tags: ["Punto de venta", "Windows", "Inventario", "Sin internet"],
+    image: "assets/img/projects/maydek-caja-venta.jpg",
+    gallery: [
+      { src: "assets/img/projects/maydek-caja-venta.jpg", alt: "Caja: pantalla de venta" },
+      { src: "assets/img/projects/maydek-caja-cobro.jpg", alt: "Caja: cobro" },
+      { src: "assets/img/projects/maydek-admin-tablero.jpg", alt: "Administración: tablero de ventas" }
+    ],
+    demo: "https://maydek.vercel.app",
+    repo: "",
+    status: "En proceso",
+    featured: true,
+    reverse: true
+  },
+  {
     title: "Fajas Colombianas Maydel",
     description: "Tienda en línea de fajas colombianas para venta al público y a distribuidoras.",
     problem: "El negocio vendía principalmente por mensajes: las clientas no podían ver el catálogo completo y atender pedidos de mayoreo y dudas de tallas era manual y lento.",
