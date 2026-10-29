@@ -60,7 +60,7 @@ Kato Labs/
     ├── img/
     │   ├── profile/            ← Tu foto de perfil
     │   └── projects/           ← Capturas de tus proyectos
-    └── docs/                   ← Tu CV (cv.pdf)
+    └── docs/                   ← Tus CV (cv-es.pdf, cv-en.pdf)
 ```
 
 ---
@@ -80,7 +80,7 @@ Busca **`TODO`** en `index.html` (Ctrl+F en VS Code) para encontrar cada punto.
 | 7 | **Proyectos** | `js/data/projects.js` |
 | 8 | Experiencia y formación | `index.html` → `#trayectoria` |
 | 9 | Correo (3 lugares) | `index.html` → `#contacto`, `#proyectos` y footer |
-| 10 | CV en PDF (ya incluido; reemplázalo al actualizarlo) | `assets/docs/cv.pdf` |
+| 10 | CV en PDF, español e inglés (ya incluidos; reemplázalos al actualizarlos) | `assets/docs/cv-es.pdf`, `assets/docs/cv-en.pdf` |
 
 ---
 
